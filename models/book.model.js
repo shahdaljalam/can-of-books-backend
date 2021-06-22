@@ -1,8 +1,8 @@
 'use strict'
 
-const mongoose = require ('mangoose')
+const mongoose = require ('mongoose')
 
-const BookSchema = new mangoose.Schema ({
+const BookSchema = new mongoose.Schema ({
     name:{type:String},
     description : {type:String},
     status : {type:String}
