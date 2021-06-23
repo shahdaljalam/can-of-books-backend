@@ -7,13 +7,9 @@ app.use(cors())
 app.use(express.json());
 require('dotenv').config();
 const PORT = process.env.PORT;
-const {seedUserData} = require('./models/user.model');
+// const {seedUserData} = require('./models/user.model');
 
-const getBooks = require('./controllers/Book.controller');
-
-    //    createBook,
-    //    updateBook  
-          
+const {getBooks,createBook,updateBook,deleteBook } = require('./controllers/Book.controller');
 
 
 mongoose.connect(process.env.MONGO_URL,
@@ -23,11 +19,12 @@ mongoose.connect(process.env.MONGO_URL,
 // seedUserData();
 app.get('/',(x,y)=>{
     y.send('work');
-})
+});
 app.get('/books',getBooks );
 
-// app.post('/cat', createBook);
-// app.put('/cat/:book_idx',updateBook);
+app.post('/books', createBook);
+app.put('/books/:book_idx',updateBook);
+app.delete('/books/:book_idx',deleteBook);
 
 app.listen(PORT, () => {
     console.log(`Server started on ${PORT}`);
