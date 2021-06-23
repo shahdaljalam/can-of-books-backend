@@ -7,15 +7,16 @@ app.use(cors())
 app.use(express.json());
 require('dotenv').config();
 const PORT = process.env.PORT;
-// const {seedUserData} = require('./models/user.model');
+const {seedUserData} = require('./models/user.model');
 
-const {getBooks,
-       createBook,
-       updateBook       
-} = require('./controllers/Book.controller');
+const getBooks = require('./controllers/Book.controller');
+
+    //    createBook,
+    //    updateBook  
+          
 
 
-mongoose.connect('mongodb://localhost:27017/myFavoriteBook',
+mongoose.connect(process.env.MONGO_URL,
     { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
@@ -25,8 +26,8 @@ app.get('/',(x,y)=>{
 })
 app.get('/books',getBooks );
 
-app.post('/cat', createBook);
-app.put('/cat/:book_idx',updateBook);
+// app.post('/cat', createBook);
+// app.put('/cat/:book_idx',updateBook);
 
 app.listen(PORT, () => {
     console.log(`Server started on ${PORT}`);
